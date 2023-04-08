@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head></head>
+<body>
+
+<header>
+
+    <nav th:fragment="naviagtion" class="navbar navbar-expand-lg">
+
+
+        <a class="nav-link " href="/">Liboo </a>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+             <ul class="navbar-nav col-12 justify-content-end">
+
+
+
+                <th:block sec:authorize="hasRole('ROLE_LIBRARIAN')">
+
+                    <a>Librarian Page </a>
+
+                </th:block>
+
+
+                <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+
+                    <a>Admin Page </a>
+
+                </th:block>
+
+
+                <th:block sec:authorize="!isAuthenticated()">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/user/register}">Register </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/user/login}">Login </a>
+                    </li>
+
+
+                </th:block>
+
+
+                <th:block sec:authorize="isAuthenticated()">
+                    <a href="/user/profile">Profile </a>
+                    <a>Stats </a>
+                    <li class="nav-item">
+                        <form th:action="@{/user/logout}"
+                              th:method="POST">
+                            <button type="submit">
+                                Logout
+                            </button>
+                        </form>
+                    </li>
+                </th:block>
+
+            </ul>
+        </div>
+    </nav>
+
+</header>
+
+</body>
+</html>

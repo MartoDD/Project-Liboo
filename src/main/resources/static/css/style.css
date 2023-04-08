@@ -1,0 +1,51 @@
+body {
+    background-image: url('/img/background.jpg');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+nav {
+background-color: rgba(210, 187, 187, 0.4);
+
+}
+
+nav li a {
+    color: white;
+    text-decoration: none;
+    font-family: "Lato Semibold", sans-serif;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+    font-family: "Lato Semibold", sans-serif;
+}
+
+
+h1 {
+    text-align: center;
+    color: #ffffff;
+    margin-top: 200px;
+}
+
+h5 {
+    text-align: center;
+    color: #ffffff;
+    margin-top: 150px;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+input {
+    width: 30%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+
+input {
+    align-items: center;
+}
+
