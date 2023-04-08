@@ -11,6 +11,14 @@ background-color: rgba(210, 187, 187, 0.4);
 
 }
 
+form{
+    justify-content: center;
+    background-color: rgba(210, 187, 187, 0.4);
+    horiz-align: center;
+    vertical-align: center;
+}
+
+
 nav li a {
     color: white;
     text-decoration: none;
