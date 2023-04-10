@@ -28,6 +28,7 @@ public class InitService {
     private void initAdmin() {
 
         User user = new User();
+        user.setFullName("Admin Adminov");
         user.setUsername("admin");
         user.setRole(RoleEnum.ADMIN);
         user.setPassword(passwordEncoder.encode("admin123"));

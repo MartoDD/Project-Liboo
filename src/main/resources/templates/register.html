@@ -15,39 +15,55 @@
         th:object="${userRegisterDto}">
 
     <h1>Please Register</h1>
-    <div>
-        <label> Username </label>
-    </div>
-    <input
-            th:field="*{username}"
 
-            id="username"
-            name="username"/>
+    <label> Username
+
+        <input
+                th:field="*{username}"
+
+                id="username"
+                name="username"/>
+    </label>
+
+    <label > Full Name
+
+        <input
+        th:field="*{fullName}"
+        id="fullName"
+        name="fullName"/>
+
+
+    </label>
     <small th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="bg-danger"></small>
 
-    <div>
-        <label> Email </label>
-    </div>
-    <input
-            th:field="*{email}"
-            name="email"
-    >
+
+    <label> Email
+
+        <input
+                th:field="*{email}"
+                name="email"
+        >
+    </label>
     <small th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="bg-danger"></small>
-    <div>
-        <label> Password </label>
-    </div>
+
+        <label> Password
+
     <input
             th:field="*{password}"
             name="password"
+            type="password"
     >
+        </label>
     <small th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="bg-danger"></small>
-    <div>
-        <label> Confirm Password </label>
-    </div>
+
+        <label> Confirm Password
+
     <input
             th:field="*{confirmPassword}"
             name="confirmPassword"
+            type="password"
     >
+        </label>
     <div>
         <button>Register</button>
     </div>

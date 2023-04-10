@@ -13,6 +13,8 @@ public class User extends BaseEntity {
     @Column(unique = true, nullable = false)
     private String username;
 
+    @Column(nullable = false)
+    private String fullName;
     @Column(unique = true, nullable = false)
     private String email;
     @Column(nullable = false)
@@ -33,6 +35,14 @@ public class User extends BaseEntity {
     private List<Challenge> challenges;
 
     public User() {
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getUsername() {
