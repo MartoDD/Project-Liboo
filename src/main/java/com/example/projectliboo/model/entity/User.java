@@ -1,5 +1,6 @@
 package com.example.projectliboo.model.entity;
 
+import com.example.projectliboo.model.enums.RoleEnum;
 import jakarta.persistence.*;
 import org.hibernate.annotations.Fetch;
 
@@ -18,9 +19,10 @@ public class User extends BaseEntity {
     private String password;
     @Column
     private String profilePicture;
-    @ManyToMany(fetch = FetchType.EAGER)
+
     @Column
-    private List<Role> roles;
+    @Enumerated(EnumType.STRING)
+    private RoleEnum role;
     @ManyToMany
     private List<Book> books;
     @ManyToMany
@@ -65,12 +67,12 @@ public class User extends BaseEntity {
         this.profilePicture = profilePicture;
     }
 
-    public List<Role> getRoles() {
-        return roles;
+    public RoleEnum getRole() {
+        return role;
     }
 
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
+    public void setRole(RoleEnum role) {
+        this.role = role;
     }
 
     public List<Book> getBooks() {

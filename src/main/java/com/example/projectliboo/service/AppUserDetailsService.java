@@ -1,7 +1,7 @@
 package com.example.projectliboo.service;
 
-import com.example.projectliboo.model.entity.Role;
 import com.example.projectliboo.model.entity.User;
+import com.example.projectliboo.model.enums.RoleEnum;
 import com.example.projectliboo.repository.UserRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -36,14 +37,15 @@ public class AppUserDetailsService implements UserDetailsService {
 
     private List<GrantedAuthority> extractAuthorities(User user) {
 
-
-
-        return user.getRoles().stream().map(this::mapRole).toList();
+        List<GrantedAuthority> list = new ArrayList<>();
+        GrantedAuthority ga = mapRole(user.getRole());
+        list.add(ga);
+        return list;
 
     }
 
-    private GrantedAuthority mapRole(Role role) {
+    private GrantedAuthority mapRole(RoleEnum role) {
 
-        return new SimpleGrantedAuthority("ROLE_" + role.getRoleName().name());
+        return new SimpleGrantedAuthority("ROLE_" + role.name());
     }
 }

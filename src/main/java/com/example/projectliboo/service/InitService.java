@@ -1,36 +1,40 @@
 package com.example.projectliboo.service;
 
-import com.example.projectliboo.model.entity.Role;
+import com.example.projectliboo.model.entity.User;
 import com.example.projectliboo.model.enums.RoleEnum;
-import com.example.projectliboo.repository.RoleRepository;
+import com.example.projectliboo.repository.UserRepository;
 import jakarta.annotation.PostConstruct;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.Arrays;
 
 @Service
 public class InitService {
 
-    private final RoleRepository roleRepository;
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public InitService(RoleRepository roleRepository) {
-        this.roleRepository = roleRepository;
+    public InitService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @PostConstruct
     public void init() {
-        initRoles();
-    }
-    private void initRoles() {
-
-        if (roleRepository.count() == 0) {
-            Arrays.stream(RoleEnum.values()).
-                    map(roleEnum -> {
-                        Role role = new Role();
-                        role.setRoleName(roleEnum);
-
-                        return role;
-                    }).forEach(roleRepository::save);
+        if (userRepository.count() == 0) {
+            initAdmin();
         }
     }
+
+    private void initAdmin() {
+
+        User user = new User();
+        user.setUsername("admin");
+        user.setRole(RoleEnum.ADMIN);
+        user.setPassword(passwordEncoder.encode("admin123"));
+        user.setEmail("admin@gmail.com");
+        userRepository.save(user);
+
+    }
+
 }
+
