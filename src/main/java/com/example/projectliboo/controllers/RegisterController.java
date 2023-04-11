@@ -5,6 +5,7 @@ import com.example.projectliboo.service.User.UserService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,6 +41,10 @@ public class RegisterController {
     @PostMapping("/register")
     private String registerUser(@Valid UserRegisterDto userRegisterDto, BindingResult bindingResult,
                                 RedirectAttributes redirectAttributes) {
+
+        if (!userRegisterDto.getConfirmPassword().equals(userRegisterDto.getPassword())) {
+            bindingResult.addError(new FieldError("differentPassword", "confirmPassword", "Password does not match!"));
+        }
 
         if (bindingResult.hasErrors()) {
 

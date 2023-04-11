@@ -12,29 +12,34 @@
 <form
         th:method="POST"
         th:action="@{/user/register}"
-        th:object="${userRegisterDto}">
+        th:object="${userRegisterDto}"
+        class="mx-auto w-25 bg-blur rounded">
 
     <h1>Please Register</h1>
-
-    <label> Username
-
+    <div class="form-group">
+        <div class="label-holder textCol d-flex justify-content-center" >
+            <label for="username" class="h4 mb-2 text-white" > Username</label>
+        </div>
         <input
                 th:field="*{username}"
-
+                type="text"
+                class="form-control"
                 id="username"
                 name="username"/>
-    </label>
 
-    <label > Full Name
+        <small th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="bg-danger" ></small>
+    </div>
+
+    <label> Full Name
 
         <input
-        th:field="*{fullName}"
-        id="fullName"
-        name="fullName"/>
+                th:field="*{fullName}"
+                id="fullName"
+                name="fullName"/>
 
 
     </label>
-    <small th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="bg-danger"></small>
+    <small th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}" class="bg-danger"></small>
 
 
     <label> Email
@@ -46,24 +51,25 @@
     </label>
     <small th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="bg-danger"></small>
 
-        <label> Password
+    <label> Password
 
-    <input
-            th:field="*{password}"
-            name="password"
-            type="password"
-    >
-        </label>
+        <input
+                th:field="*{password}"
+                name="password"
+                type="password"
+        >
+    </label>
     <small th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="bg-danger"></small>
 
-        <label> Confirm Password
+    <label> Confirm Password
 
-    <input
-            th:field="*{confirmPassword}"
-            name="confirmPassword"
-            type="password"
-    >
-        </label>
+        <input
+                th:field="*{confirmPassword}"
+                name="confirmPassword"
+                type="password"
+        >
+    </label>
+    <small th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}" class="bg-danger" ></small>
     <div>
         <button>Register</button>
     </div>

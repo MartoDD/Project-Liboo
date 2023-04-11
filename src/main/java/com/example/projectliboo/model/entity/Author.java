@@ -13,8 +13,9 @@ public class Author extends BaseEntity {
     private String name;
     @Column(nullable = false)
     private String information;
-    @Column(nullable = false)
-    private String profilePicture;
+
+    @Column
+    private byte[] profilePicture;
     @OneToMany
     private List<Book> books;
 
@@ -37,11 +38,11 @@ public class Author extends BaseEntity {
         this.information = information;
     }
 
-    public String getProfilePicture() {
+    public byte[] getProfilePicture() {
         return profilePicture;
     }
 
-    public void setProfilePicture(String profilePicture) {
+    public void setProfilePicture(byte[] profilePicture) {
         this.profilePicture = profilePicture;
     }
 
