@@ -10,33 +10,35 @@
 
 <header th:replace="~{fragments/navigation}"></header>
 
-<form
+<form class="login-form"
         th:method="POST"
         th:action="@{/user/login}"
         th:object="${userLoginDto}"
 >
 
     <h1>Please Login</h1>
-    <label> Username
-        <input
-                th:field="*{username}"
-                name="username">
+    <label class="login-label"> Username</label>
+
+    <input class="login-input"
+            th:field="*{username}"
+            name="username">
+
+    <label class="login-label" >Password
+
     </label>
 
-    <label>Password
-        <input
-                th:field="*{password}"
-                name="password"
-                type="password"
-                id="password"
-        >
-    </label>
+    <input class="login-input"
+           th:field="*{password}"
+           name="password"
+           type="password"
+           id="password"
+    >
 
-    <small th:if="${bad_credentials}">
+    <small class="small-login" th:if="${bad_credentials}">
         Invalid username or password!
 
     </small>
-    <button type="submit">Login</button>
+    <button class="login-submit" type="submit">Login</button>
 </form>
 
 </body>
