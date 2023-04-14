@@ -6,6 +6,7 @@ import com.example.projectliboo.repository.AuthorRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -26,7 +27,10 @@ public class AuthorServiceImpl implements AuthorService {
         authorRepository.save(author);
     }
 
-
+    @Override
+    public List<Author> getAllAuthors() {
+        return authorRepository.findAllByIdTrue();
+    }
 
 
     @Override

@@ -10,6 +10,8 @@ public interface AuthorService {
 
     void addAuthor(AuthorCreateDto authorCreateDto);
 
+    List<Author> getAllAuthors();
+
     Optional<Author> findAuthorByName(String name);
 
 }

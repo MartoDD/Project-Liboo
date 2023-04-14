@@ -37,10 +37,6 @@ public class InitService {
             initAdmin();
         }
 
-        if (genreRepository.count()==0){
-            initGenres();
-        }
-
     }
 
     private void initAdmin() {
@@ -55,11 +51,7 @@ public class InitService {
 
     }
 
-    private void initGenres(){
 
-        Arrays.stream(GenreEnum.values()).forEach(genreService::createGenre);
-
-    }
 
 }
 

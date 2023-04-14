@@ -2,6 +2,7 @@ package com.example.projectliboo.model.entity;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -16,7 +17,7 @@ public class Book extends BaseEntity {
     private String imageUrl;
     @Column
     private int pages;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Genre> genres;
     @ManyToOne(fetch = FetchType.EAGER)
     private Author author;
@@ -24,6 +25,8 @@ public class Book extends BaseEntity {
     private List<User> users;
 
     public Book() {
+        this.users=new ArrayList<>();
+        this.genres=new ArrayList<>();
     }
 
     public int getPages() {

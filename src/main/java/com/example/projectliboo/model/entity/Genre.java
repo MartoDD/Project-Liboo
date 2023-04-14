@@ -11,20 +11,20 @@ import java.util.List;
 public class Genre extends BaseEntity {
 
     @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private GenreEnum genreName;
 
-    @ManyToMany
+    private String genreName;
+
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Book> books;
 
     public Genre() {
     }
 
-    public GenreEnum getGenreName() {
+    public String getGenreName() {
         return genreName;
     }
 
-    public void setGenreName(GenreEnum genreName) {
+    public void setGenreName(String genreName) {
         this.genreName = genreName;
     }
 
