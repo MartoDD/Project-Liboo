@@ -2,6 +2,7 @@ package com.example.projectliboo.model.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.OneToMany;
 
 import java.util.List;
@@ -15,8 +16,8 @@ public class Author extends BaseEntity {
     private String information;
 
     @Column
-    private byte[] profilePicture;
-    @OneToMany
+    private String profilePicture;
+    @OneToMany (fetch = FetchType.EAGER)
     private List<Book> books;
 
     public Author() {
@@ -38,11 +39,11 @@ public class Author extends BaseEntity {
         this.information = information;
     }
 
-    public byte[] getProfilePicture() {
+    public String getProfilePicture() {
         return profilePicture;
     }
 
-    public void setProfilePicture(byte[] profilePicture) {
+    public void setProfilePicture(String profilePicture) {
         this.profilePicture = profilePicture;
     }
 

@@ -12,15 +12,26 @@ public class Book extends BaseEntity {
     private String title;
     @Column(nullable = false)
     private String description;
+    @Column
     private String imageUrl;
+    @Column
+    private int pages;
     @ManyToMany
     private List<Genre> genres;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Author author;
     @ManyToMany
     private List<User> users;
 
     public Book() {
+    }
+
+    public int getPages() {
+        return pages;
+    }
+
+    public void setPages(int pages) {
+        this.pages = pages;
     }
 
     public String getTitle() {

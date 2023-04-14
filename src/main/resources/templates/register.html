@@ -9,68 +9,67 @@
 
 <header th:replace="~{fragments/navigation}"></header>
 
-<form
+<form class="login-form"
         th:method="POST"
         th:action="@{/user/register}"
         th:object="${userRegisterDto}"
-        class="mx-auto w-25 bg-blur rounded">
+        >
 
     <h1>Please Register</h1>
-    <div class="form-outline mb-4">
-        <div class="label-holder textCol d-flex justify-content-center" >
-            <label for="username" class="h4 mb-2 text-white" > Username</label>
-        </div>
+
+
+            <label class="login-label" > Username</label>
+
         <input
                 th:field="*{username}"
                 type="text"
-                class="form-control form-control-lg"
+                class="login-input"
                 id="username"
                 name="username"/>
 
-        <small th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="bg-danger" ></small>
-    </div>
+        <small th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="small-login" ></small>
 
-    <label> Full Name
 
-        <input
-                th:field="*{fullName}"
-                id="fullName"
-                name="fullName"/>
+    <label class="login-label" > Full Name</label>
 
+    <input class="login-input"
+            th:field="*{fullName}"
+            id="fullName"
+            name="fullName"/>
+
+    <small class="small-login" th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}" ></small>
+
+
+    <label class="login-label" > Email
     </label>
-    <small th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}" class="bg-danger"></small>
 
+    <input class="login-input"
+            th:field="*{email}"
+            name="email"
+    >
 
-    <label> Email
+    <small th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="small-login"></small>
 
-        <input
-                th:field="*{email}"
-                name="email"
-        >
+    <label class="login-label" > Password
     </label>
-    <small th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="bg-danger"></small>
+    <input class="login-input"
+            th:field="*{password}"
+            name="password"
+            type="password"
+    >
+    <small th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="small-login" ></small>
 
-    <label> Password
-
-        <input
-                th:field="*{password}"
-                name="password"
-                type="password"
-        >
+    <label class="login-label" > Confirm Password
     </label>
-    <small th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="bg-danger"></small>
 
-    <label> Confirm Password
-
-        <input
-                th:field="*{confirmPassword}"
-                name="confirmPassword"
-                type="password"
-        >
-    </label>
-    <small th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}" class="bg-danger" ></small>
+    <input class="login-input"
+            th:field="*{confirmPassword}"
+            name="confirmPassword"
+            type="password"
+    >
+    <small th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}" class="small-login" ></small>
     <div>
-        <button>Register</button>
+        <button class="liboo-submit" >Register</button>
     </div>
 </form>
 

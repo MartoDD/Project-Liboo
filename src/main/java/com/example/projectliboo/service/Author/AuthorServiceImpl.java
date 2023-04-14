@@ -3,44 +3,34 @@ package com.example.projectliboo.service.Author;
 import com.example.projectliboo.model.dtos.AuthorCreateDto;
 import com.example.projectliboo.model.entity.Author;
 import com.example.projectliboo.repository.AuthorRepository;
-import com.example.projectliboo.util.ImgUtil;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import java.util.Base64;
-import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AuthorServiceImpl implements AuthorService {
 
     private final AuthorRepository authorRepository;
+    private final ModelMapper modelMapper;
 
-    public AuthorServiceImpl(AuthorRepository authorRepository) {
+    public AuthorServiceImpl(AuthorRepository authorRepository, ModelMapper modelMapper) {
         this.authorRepository = authorRepository;
+        this.modelMapper = modelMapper;
     }
 
     @Override
     public void addAuthor(AuthorCreateDto authorCreateDto) {
 
-        Author author = new Author();
-        author.setName(authorCreateDto.getName());
-        author.setInformation(authorCreateDto.getInformation());
-        author.setProfilePicture(ImgUtil.compressImage(authorCreateDto.getProfilePicture()));
-
+        Author author = modelMapper.map(authorCreateDto, Author.class);
         authorRepository.save(author);
-
     }
 
+
+
+
     @Override
-    public AuthorCreateDto getAllAuthors() {
-
-        Author author =authorRepository.getAuthorByName("Steven King");
-        AuthorCreateDto displayAuthor = new AuthorCreateDto();
-        displayAuthor.setName(author.getName());
-        displayAuthor.setInformation(author.getInformation());
-        String imageBase64 = Base64.getEncoder().encodeToString(author.getProfilePicture());
-        displayAuthor.setProfilePicture(ImgUtil.decompressImage(author.getProfilePicture()));
-
-
-        return displayAuthor;
+    public Optional<Author> findAuthorByName(String name) {
+        return authorRepository.findAuthorByName(name);
     }
 }
