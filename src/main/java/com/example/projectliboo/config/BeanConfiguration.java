@@ -1,6 +1,7 @@
 package com.example.projectliboo.config;
 
 import com.example.projectliboo.model.enums.RoleEnum;
+import com.example.projectliboo.model.view.UserView;
 import com.example.projectliboo.repository.UserRepository;
 import com.example.projectliboo.service.AppUserDetailsService;
 import org.modelmapper.ModelMapper;
@@ -62,5 +63,10 @@ public class BeanConfiguration {
     @Bean
     public ModelMapper modelMapper() {
         return new ModelMapper();
+    }
+
+    @Bean
+    public UserView userView(){
+        return new UserView();
     }
 }
