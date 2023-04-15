@@ -22,9 +22,8 @@ public class User extends BaseEntity {
     @Column
     private String profilePicture;
 
-    @Column
-    @Enumerated(EnumType.STRING)
-    private RoleEnum role;
+    @ManyToOne
+    private Role role;
     @ManyToMany
     private List<Book> books;
     @ManyToMany
@@ -37,20 +36,20 @@ public class User extends BaseEntity {
     public User() {
     }
 
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
     public String getUsername() {
         return username;
     }
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getEmail() {
@@ -77,11 +76,11 @@ public class User extends BaseEntity {
         this.profilePicture = profilePicture;
     }
 
-    public RoleEnum getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(RoleEnum role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 

@@ -38,7 +38,7 @@ public class AppUserDetailsService implements UserDetailsService {
     private List<GrantedAuthority> extractAuthorities(User user) {
 
         List<GrantedAuthority> list = new ArrayList<>();
-        GrantedAuthority ga = mapRole(user.getRole());
+        GrantedAuthority ga = mapRole(user.getRole().getRoleName());
         list.add(ga);
         return list;
 
