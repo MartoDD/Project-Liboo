@@ -1,18 +1,17 @@
 package com.example.projectliboo.service.Book;
 
 import com.example.projectliboo.model.dtos.BookCreateDto;
+import com.example.projectliboo.model.dtos.BookEditDto;
 import com.example.projectliboo.model.entity.Author;
 import com.example.projectliboo.model.entity.Book;
 import com.example.projectliboo.model.entity.Genre;
-import com.example.projectliboo.model.enums.GenreEnum;
 import com.example.projectliboo.model.view.BookView;
 import com.example.projectliboo.repository.AuthorRepository;
 import com.example.projectliboo.repository.BookRepository;
 import com.example.projectliboo.repository.GenreRepository;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -56,17 +55,23 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public BookView getBookById(Long id) {
-       Book book =bookRepository.findById(id).orElse(null);
-       BookView bookView = map(book);
+        Book book = bookRepository.findById(id).orElse(null);
+        BookView bookView = map(book);
 
         return bookView;
     }
 
     @Override
-    public Page<BookView> getAllBooks(Pageable pageable) {
+    public List<BookView> getAllBooks(String keyword) {
 
-        return bookRepository.findAll(pageable).map(this::map);
+        if (keyword == null) {
+
+            return bookRepository.findAll().stream().map(this::map).collect(Collectors.toList());
+        }
+
+        return bookRepository.findBooksByTitleContaining(keyword).stream().map(this::map).collect(Collectors.toList());
     }
+
 
     @Override
     public BookView map(Book book) {
@@ -79,6 +84,23 @@ public class BookServiceImpl implements BookService {
         bookView.setImageUrl(book.getImageUrl());
         bookView.setId(book.getId());
         return bookView;
+    }
+
+    @Override
+    public void deleteBook(Long id) {
+        bookRepository.deleteById(id);
+    }
+
+    @Override
+    public void editBook(Long id, BookEditDto bookEditDto) {
+
+        Book book = bookRepository.findById(id).orElse(null);
+        book.setTitle(bookEditDto.getBookTitle());
+        book.setImageUrl(bookEditDto.getBookCover());
+        book.setTitle(bookEditDto.getBookTitle());
+        book.setPages(bookEditDto.getBookPages());
+        bookRepository.save(book);
+
     }
 
 

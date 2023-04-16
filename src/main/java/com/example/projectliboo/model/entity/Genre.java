@@ -1,7 +1,6 @@
 package com.example.projectliboo.model.entity;
 
 
-import com.example.projectliboo.model.enums.GenreEnum;
 import jakarta.persistence.*;
 
 import java.util.List;

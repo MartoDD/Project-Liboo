@@ -1,11 +1,13 @@
 package com.example.projectliboo.service.Book;
 
 import com.example.projectliboo.model.dtos.BookCreateDto;
+import com.example.projectliboo.model.dtos.BookEditDto;
 import com.example.projectliboo.model.entity.Book;
 import com.example.projectliboo.model.view.BookView;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface BookService {
@@ -16,8 +18,12 @@ public interface BookService {
 
     BookView getBookById(Long id);
 
-    Page<BookView> getAllBooks(Pageable pageable);
+    List<BookView> getAllBooks(String keyword);
 
     BookView map(Book book);
+
+    void deleteBook(Long id);
+
+    void editBook(Long id, BookEditDto bookEditDto);
 
 }

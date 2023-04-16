@@ -21,11 +21,9 @@ public class Book extends BaseEntity {
     private List<Genre> genres;
     @ManyToOne(fetch = FetchType.EAGER)
     private Author author;
-    @ManyToMany
-    private List<User> users;
+
 
     public Book() {
-        this.users=new ArrayList<>();
         this.genres=new ArrayList<>();
     }
 
@@ -77,11 +75,5 @@ public class Book extends BaseEntity {
         this.author = author;
     }
 
-    public List<User> getUsers() {
-        return users;
-    }
 
-    public void setUsers(List<User> users) {
-        this.users = users;
-    }
 }

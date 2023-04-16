@@ -1,6 +1,7 @@
 package com.example.projectliboo.service.User;
 
 import com.example.projectliboo.model.dtos.UserRegisterDto;
+import com.example.projectliboo.model.dtos.UserRoleChangeDto;
 import com.example.projectliboo.model.dtos.UserSearchDto;
 import com.example.projectliboo.model.entity.Role;
 import com.example.projectliboo.model.entity.User;
@@ -54,7 +55,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> findUserByName(String name) {
+    public List<User> findUserByName(String name) {
 
         return userRepository.findUserByFullNameContaining(name);
     }
@@ -63,8 +64,9 @@ public class UserServiceImpl implements UserService {
     public UserView mapUser(User user) {
 
         UserView userView=new UserView();
+        userView.setId(user.getId());
         userView.setEmail(user.getEmail());
-        userView.setRole(user.getRole().toString());
+        userView.setRole(user.getRole().getRoleName().toString());
         userView.setUsername(user.getUsername());
         userView.setFullName(user.getFullName());
         userView.setProfilePicture(user.getProfilePicture());
@@ -72,30 +74,6 @@ public class UserServiceImpl implements UserService {
         return userView;
     }
 
-    @Override
-    public UserView searchUser(UserSearchDto userSearchDto) {
-
-        User user=null;
-
-        switch (userSearchDto.getSearchType()) {
-            case "Email":
-                user=userRepository.findUserByEmail(userSearchDto.getValue()).orElse(null);
-                break;
-            case "Name":
-                user=userRepository.findUserByFullNameContaining(userSearchDto.getValue()).orElse(null);
-                break;
-            case "Username":
-                user=userRepository.findUserByUsername(userSearchDto.getValue()).orElse(null);
-                break;
-        }
-
-        if (user!=null){
-
-            return mapUser(user);
-        }
-
-        return null;
-    }
 
     @Override
     public List<UserView> getAllUsers(String keyword) {
@@ -107,6 +85,23 @@ public class UserServiceImpl implements UserService {
 
       return userRepository.findUserByFullNameContaining(keyword).stream().map(this::mapUser).collect(Collectors.toList());
 
+
+    }
+
+    @Override
+    public void deleteUser(Long id) {
+
+        userRepository.deleteById(id);
+
+    }
+
+    @Override
+    public void changeUserRole(UserRoleChangeDto userRoleChangeDto, Long id) {
+
+        User user = userRepository.findById(id).orElse(null);
+        Role role = roleRepository.findByRoleName(RoleEnum.valueOf(userRoleChangeDto.getRole()));
+        user.setRole(role);
+        userRepository.save(user);
 
     }
 
