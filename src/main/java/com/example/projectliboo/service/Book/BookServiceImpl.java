@@ -44,7 +44,7 @@ public class BookServiceImpl implements BookService {
         book.setPages(bookCreateDto.getNumberOfPages());
         book.setImageUrl(bookCreateDto.getImageUrl());
         book.setAuthor(author);
-        book.getGenres().add(genre);
+        book.setGenre(genre);
         bookRepository.save(book);
         author.getBooks().add(book);
         authorRepository.save(author);
@@ -56,9 +56,27 @@ public class BookServiceImpl implements BookService {
     @Override
     public BookView getBookById(Long id) {
         Book book = bookRepository.findById(id).orElse(null);
-        BookView bookView = map(book);
 
-        return bookView;
+        return map(book);
+    }
+
+    @Override
+    public BookEditDto getBookByIdForEdit(Long id) {
+        Book book = bookRepository.findById(id).orElse(null);
+
+        return mapBookEdit(book);
+    }
+
+    @Override
+    public BookEditDto mapBookEdit(Book book) {
+
+        BookEditDto bookEditDto = new BookEditDto();
+        bookEditDto.setTitle(book.getTitle());
+        bookEditDto.setBookCover(book.getImageUrl());
+        bookEditDto.setBookDescription(book.getDescription());
+        bookEditDto.setId(book.getId());
+
+        return bookEditDto;
     }
 
     @Override
@@ -79,7 +97,7 @@ public class BookServiceImpl implements BookService {
         bookView.setTitle(book.getTitle());
         bookView.setDescription(book.getDescription());
         bookView.setPages(book.getPages());
-        bookView.setGenres(book.getGenres());
+        bookView.setGenre(book.getGenre());
         bookView.setAuthor(book.getAuthor());
         bookView.setImageUrl(book.getImageUrl());
         bookView.setId(book.getId());
@@ -88,6 +106,13 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public void deleteBook(Long id) {
+        Book book = bookRepository.findById(id).orElse(null);
+        Author author = authorRepository.findById(book.getAuthor().getId()).orElse(null);
+        author.getBooks().remove(book);
+        authorRepository.save(author);
+        Genre genre = genreRepository.findById(book.getGenre().getId()).orElse(null);
+        genre.getBooks().remove(book);
+        genreRepository.save(genre);
         bookRepository.deleteById(id);
     }
 
@@ -95,9 +120,8 @@ public class BookServiceImpl implements BookService {
     public void editBook(Long id, BookEditDto bookEditDto) {
 
         Book book = bookRepository.findById(id).orElse(null);
-        book.setTitle(bookEditDto.getBookTitle());
+        book.setTitle(bookEditDto.getTitle());
         book.setImageUrl(bookEditDto.getBookCover());
-        book.setTitle(bookEditDto.getBookTitle());
         book.setPages(bookEditDto.getBookPages());
         bookRepository.save(book);
 

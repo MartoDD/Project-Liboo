@@ -17,6 +17,8 @@ public interface BookService {
     void addBook(BookCreateDto bookCreateDto);
 
     BookView getBookById(Long id);
+    BookEditDto getBookByIdForEdit(Long id);
+    BookEditDto mapBookEdit(Book book);
 
     List<BookView> getAllBooks(String keyword);
 

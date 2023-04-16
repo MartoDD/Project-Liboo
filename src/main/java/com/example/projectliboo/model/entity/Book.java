@@ -17,14 +17,14 @@ public class Book extends BaseEntity {
     private String imageUrl;
     @Column
     private int pages;
-    @ManyToMany(fetch = FetchType.EAGER)
-    private List<Genre> genres;
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Genre genre;
     @ManyToOne(fetch = FetchType.EAGER)
     private Author author;
 
 
     public Book() {
-        this.genres=new ArrayList<>();
+
     }
 
     public int getPages() {
@@ -59,12 +59,12 @@ public class Book extends BaseEntity {
         this.imageUrl = imageUrl;
     }
 
-    public List<Genre> getGenres() {
-        return genres;
+    public Genre getGenre() {
+        return genre;
     }
 
-    public void setGenres(List<Genre> genres) {
-        this.genres = genres;
+    public void setGenre(Genre genre) {
+        this.genre = genre;
     }
 
     public Author getAuthor() {
