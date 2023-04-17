@@ -9,6 +9,8 @@ import com.example.projectliboo.model.view.BookView;
 import com.example.projectliboo.repository.AuthorRepository;
 import com.example.projectliboo.repository.BookRepository;
 import com.example.projectliboo.repository.GenreRepository;
+import com.example.projectliboo.repository.UserRepository;
+import com.example.projectliboo.service.User.UserService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,11 +23,15 @@ public class BookServiceImpl implements BookService {
     private final BookRepository bookRepository;
     private final AuthorRepository authorRepository;
     private final GenreRepository genreRepository;
+    private final UserRepository userRepository;
+    private final UserService userService;
 
-    public BookServiceImpl(BookRepository bookRepository, AuthorRepository authorRepository, GenreRepository genreRepository) {
+    public BookServiceImpl(BookRepository bookRepository, AuthorRepository authorRepository, GenreRepository genreRepository, UserRepository userRepository, UserService userService) {
         this.bookRepository = bookRepository;
         this.authorRepository = authorRepository;
         this.genreRepository = genreRepository;
+        this.userRepository = userRepository;
+        this.userService = userService;
     }
 
     @Override
@@ -108,11 +114,12 @@ public class BookServiceImpl implements BookService {
     public void deleteBook(Long id) {
         Book book = bookRepository.findById(id).orElse(null);
         Author author = authorRepository.findById(book.getAuthor().getId()).orElse(null);
-        author.getBooks().remove(book);
+        author.getBooks().removeIf(b->b.getId().equals(id));
         authorRepository.save(author);
         Genre genre = genreRepository.findById(book.getGenre().getId()).orElse(null);
-        genre.getBooks().remove(book);
+        genre.getBooks().removeIf(b->b.getId().equals(id));
         genreRepository.save(genre);
+        userRepository.findAll().forEach(u->userService.removeBook(id,u.getUsername()));
         bookRepository.deleteById(id);
     }
 

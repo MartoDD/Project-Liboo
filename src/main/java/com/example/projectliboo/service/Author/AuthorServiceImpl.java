@@ -84,5 +84,23 @@ public class AuthorServiceImpl implements AuthorService {
         return authorView;
     }
 
+    @Override
+    public AuthorEditDto getAuthorByIdForEdit(Long id) {
+        Author author=authorRepository.findById(id).orElse(null);
+
+        return mapForEdit(author);
+    }
+
+    @Override
+    public AuthorEditDto mapForEdit(Author author) {
+
+        AuthorEditDto authorEditDto=new AuthorEditDto();
+        authorEditDto.setName(author.getName());
+        authorEditDto.setInformation(author.getInformation());
+        authorEditDto.setProfilePicture(author.getProfilePicture());
+
+        return authorEditDto;
+    }
+
 
 }

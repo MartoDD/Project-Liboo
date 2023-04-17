@@ -5,65 +5,71 @@
 <body>
 <header th:replace="~{fragments/navigation}"></header>
 
-<th:block th:text="${currentUser.fullName}"></th:block>
-<th:block th:text="${currentUser.username}"></th:block>
-<th:block th:text="${currentUser.email}"></th:block>
-<img class="img-size" th:src="${currentUser.profilePicture}" alt="">
-<a th:href="@{/user/edit}">Edit Profile</a>
-
-<h2>Currently Reading</h2>
-
-<div th:each="book:${currentlyReading}"
-     th:object="${book}"
+<div class="user-block-profile"
+     th:object="${currentUser}"
 >
+    <img class="img-size-profile" th:src="*{profilePicture}">
+    <ul class="admin-list">
+        <li> Full Name -
+            <p th:text="*{fullName}"></p>
+        </li>
 
-    <a th:href="@{/book/{bookId} (bookId=*{id})}">
-        <th:block th:text="*{title}"></th:block>
-        <img class="img-size" th:src="*{imageUrl}" alt="Book cover"
-        >
-    </a>
+        <li> Username -
+            <p th:text="*{username}"></p>
+        </li>
 
+        <li> Email -
+            <p th:text="*{email}"></p>
+        </li>
+        <li> Role -
+            <p th:text="*{role.roleName}"></p>
+        </li>
+
+    </ul>
+
+    <a class="d-inline-block" th:href="@{/user/edit}">Edit Profile</a>
 </div>
 
-<h2>Want to Read</h2>
+<h2 th:if="${currentlyReading.size()!=0}" >Currently Reading</h2>
 
-<div th:each="book:${wantToRead}"
-     th:object="${book}"
->
-
-    <a th:href="@{/book/{bookId} (bookId=*{id})}">
-        <th:block th:text="*{title}"></th:block>
-        <img class="img-size" th:src="*{imageUrl}" alt="Book cover"
-        >
-    </a>
-
+<div class="d-flex justify-content-center" >
+    <div class="float-left" th:each="book:${currentlyReading}" th:object="${book}">
+        <a th:href="@{/book/{bookId} (bookId=*{id})}" style="display:flex; flex-direction:column;">
+            <p class="text-center book-font" th:text="*{title}" ></p>
+            <img class="img-size" th:src="*{imageUrl}" alt="Book cover" />
+        </a>
+    </div>
 </div>
 
-<h2>Read Books</h2>
-<div th:each="book:${read}"
-     th:object="${book}"
->
+<h2 th:if="${wantToRead.size()!=0}" >Want to Read</h2>
 
-    <a th:href="@{/book/{bookId} (bookId=*{id})}">
-        <th:block th:text="*{title}"></th:block>
-        <img class="img-size" th:src="*{imageUrl}" alt="Book cover"
-        >
-    </a>
-
+<div class="d-flex justify-content-center" >
+    <div class="float-left" th:each="book:${wantToRead}" th:object="${book}">
+        <a th:href="@{/book/{bookId} (bookId=*{id})}" style="display:flex; flex-direction:column;">
+            <p class="text-center book-font" th:text="*{title}" ></p>
+            <img class="img-size" th:src="*{imageUrl}" alt="Book cover" />
+        </a>
+    </div>
 </div>
 
-<h2>All Books</h2>
+<h2 th:if="${read.size()!=0}" >Read Books</h2>
+<div class="d-flex justify-content-center" >
+    <div class="float-left" th:each="book:${read}" th:object="${book}">
+        <a th:href="@{/book/{bookId} (bookId=*{id})}" style="display:flex; flex-direction:column;">
+            <p class="text-center book-font" th:text="*{title}" ></p>
+            <img class="img-size" th:src="*{imageUrl}" alt="Book cover" />
+        </a>
+    </div>
+</div>
+<h2 th:if="${allUserBooks.size()!=0}" >All Books</h2>
 
-<div th:each="book:${allUserBooks}"
-     th:object="${book}"
->
-
-    <a th:href="@{/book/{bookId} (bookId=*{id})}">
-        <th:block th:text="*{title}"></th:block>
-        <img class="img-size" th:src="*{imageUrl}" alt="Book cover"
-        >
-    </a>
-
+<div class="d-flex justify-content-center" >
+    <div class="float-left" th:each="book:${allUserBooks}" th:object="${book}">
+        <a th:href="@{/book/{bookId} (bookId=*{id})}" style="display:flex; flex-direction:column;">
+            <p class="text-center book-font" th:text="*{title}" ></p>
+            <img class="img-size" th:src="*{imageUrl}" alt="Book cover" />
+        </a>
+    </div>
 </div>
 
 

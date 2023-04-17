@@ -56,8 +56,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> findUserByUsername(String username) {
-        return userRepository.findUserByUsername(username);
+    public User findUserByUsername(String username) {
+        return userRepository.findUserByUsername(username).orElse(null);
     }
 
     @Override
@@ -201,12 +201,44 @@ public class UserServiceImpl implements UserService {
 
         Book book = bookRepository.findById(id).orElse(null);
         User user = userRepository.findUserByUsername(principal.getName()).orElse(null);
-        user.getTbrBooks().removeIf(b->b.getId()==book.getId());
-        user.getReadBooks().removeIf(b->b.getId()==book.getId());
-        user.getCurrentlyReading().removeIf(b->b.getId()==book.getId());
-        user.getBooks().removeIf(b->b.getId()==book.getId());
+        user.getTbrBooks().removeIf(b->b.getId().equals(book.getId()));
+        user.getReadBooks().removeIf(b->b.getId().equals(book.getId()));
+        user.getCurrentlyReading().removeIf(b->b.getId().equals(book.getId()));
+        user.getBooks().removeIf(b->b.getId().equals(book.getId()));
         userRepository.save(user);
 
+    }
+    @Override
+    public void removeBook(Long id, String username) {
+
+        Book book = bookRepository.findById(id).orElse(null);
+        User user = userRepository.findUserByUsername(username).orElse(null);
+        user.getTbrBooks().removeIf(b->b.getId().equals(book.getId()));
+        user.getReadBooks().removeIf(b->b.getId().equals(book.getId()));
+        user.getCurrentlyReading().removeIf(b->b.getId().equals(book.getId()));
+        user.getBooks().removeIf(b->b.getId().equals(book.getId()));
+        userRepository.save(user);
+
+    }
+
+    @Override
+    public UserEditDto getUserByUsernameForEdit(String username) {
+
+        User user=userRepository.findUserByUsername(username).orElse(null);
+
+        return mapForEdit(user);
+
+    }
+
+    @Override
+    public UserEditDto mapForEdit(User user) {
+
+        UserEditDto userEditDto = new UserEditDto();
+        userEditDto.setEmail(user.getEmail());
+        userEditDto.setFullName(user.getFullName());
+        userEditDto.setProfilePicture(user.getProfilePicture());
+
+        return userEditDto;
     }
 
 

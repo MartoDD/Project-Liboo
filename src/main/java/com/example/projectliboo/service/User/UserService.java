@@ -16,7 +16,7 @@ public interface UserService {
 
     void registerUser(UserRegisterDto userRegisterDto);
     Optional<User> findUserByEmail(String email);
-    Optional<User>findUserByUsername(String username);
+    User findUserByUsername(String username);
     List<User>findUserByName(String name);
     UserView mapUser(User user);
 
@@ -30,5 +30,8 @@ public interface UserService {
     void currentlyReading(Long id,Principal principal);
     void read(Long id,Principal principal);
     void remove(Long id,Principal principal);
+    void removeBook(Long id, String username);
+    UserEditDto getUserByUsernameForEdit(String username);
+    UserEditDto mapForEdit(User user);
 
 }

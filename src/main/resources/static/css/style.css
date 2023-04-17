@@ -12,7 +12,7 @@ background-color: rgba(210, 187, 187, 0.6);
 
 /* Dropdown Button */
 .dropbtn {
-    background-color: #a9a9a9;
+    background-color: rgba(210, 187, 187, 0.6);
     color: white;
     padding: 16px;
     font-size: 16px;
@@ -56,12 +56,82 @@ background-color: rgba(210, 187, 187, 0.6);
 /* Change the background color of the dropdown button when the dropdown content is shown */
 .dropdown:hover .dropbtn {background-color: #b4aeae;}
 
+/* Admin view */
+
+.user-block{
+    background-color: rgba(210, 187, 187, 0.6);
+    width: 30%;
+    margin: 10px auto;
+}
+
+.admin-list{
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+
+.admin-list li {
+    color: white;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.admin-list li p {
+    display: inline-block;
+    margin: 0 0 0 10px;
+}
+p{
+    color: white;
+}
+
+.form-container {
+    display: flex;
+    justify-content: center;
+}
+
+.form-row {
+    display: flex;
+    align-items: center;
+}
+
+select {
+     margin-right: 10px;
+ }
+
+/*  Book */
+
+.book-font{
+    font-size: x-large;
+}
+
+.user-block-profile{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.img-size-profile{
+    margin: 10px;
+    max-width: 100%;
+    height: auto;
+    max-height: 300px;
+
+}
+
+h2{
+    color: white;
+    text-align: center;
+    background-color: rgba(210, 187, 187, 0.6);
+    margin: 10px 0;
+}
 
 .login-form{
-    margin-left: auto;
-    margin-right: auto;
     width: 20%;
-    border-radius: 4%
+    margin: 10px auto;
+    border-radius: 5%
 }
 
 .small-login{
@@ -91,7 +161,7 @@ background-color: rgba(210, 187, 187, 0.6);
 }
 
 .liboo-submit{
-    margin: 15px 0 15px 38%;
+    margin: 10px 75px;
     color: white;
     background: darkgray;
     text-transform: uppercase;
@@ -109,10 +179,8 @@ small{
 }
 
 form{
-    justify-content: center;
     background-color: rgba(210, 187, 187, 0.6);
-    horiz-align: center;
-    vertical-align: center;
+
 }
 
 
@@ -135,7 +203,7 @@ h1 {
     text-align: center;
     vertical-align: middle;
     color: #ffffff;
-    margin-top: 200px;
+    margin: 10px;
 }
 
 h5 {
@@ -150,9 +218,8 @@ input {
     padding: 12px 20px;
     margin: 8px 0;
     box-sizing: border-box;
-}
-
-input {
     align-items: center;
 }
+
+
 

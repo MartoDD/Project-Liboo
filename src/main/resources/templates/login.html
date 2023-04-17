@@ -11,19 +11,19 @@
 <header th:replace="~{fragments/navigation}"></header>
 
 <form class="login-form"
-        th:method="POST"
-        th:action="@{/user/login}"
-        th:object="${userLoginDto}"
+      th:method="POST"
+      th:action="@{/user/login}"
+      th:object="${userLoginDto}"
 >
 
     <h1>Please Login</h1>
     <label class="login-label"> Username</label>
 
     <input class="login-input"
-            th:field="*{username}"
-            name="username">
+           th:field="*{username}"
+           name="username">
 
-    <label class="login-label" >Password
+    <label class="login-label">Password
 
     </label>
 
@@ -38,7 +38,9 @@
         Invalid username or password!
 
     </small>
-    <button class="liboo-submit" type="submit">Login</button>
+    <div class="text-center">
+        <button class="liboo-submit" type="submit">Login</button>
+    </div>
 </form>
 
 </body>

@@ -23,5 +23,7 @@ public interface AuthorService {
     List<AuthorView> getAllAuthors(String keyword);
 
     AuthorView map(Author author);
+    AuthorEditDto getAuthorByIdForEdit(Long id);
+    AuthorEditDto mapForEdit(Author author);
 
 }
