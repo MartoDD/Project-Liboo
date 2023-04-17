@@ -4,6 +4,7 @@ import com.example.projectliboo.model.enums.RoleEnum;
 import jakarta.persistence.*;
 import org.hibernate.annotations.Fetch;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -24,16 +25,31 @@ public class User extends BaseEntity {
 
     @ManyToOne
     private Role role;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Book> books;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Book> readBooks;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Book> tbrBooks;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<Book> currentlyReading;
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Challenge> challenges;
 
+
     public User() {
+        this.books=new ArrayList<>();
+        this.readBooks=new ArrayList<>();
+        this.tbrBooks=new ArrayList<>();
+        this.currentlyReading=new ArrayList<>();
+    }
+
+    public List<Book> getCurrentlyReading() {
+        return currentlyReading;
+    }
+
+    public void setCurrentlyReading(List<Book> currentlyReading) {
+        this.currentlyReading = currentlyReading;
     }
 
     public String getUsername() {

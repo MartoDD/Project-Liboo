@@ -1,7 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{fragments/head}"></head>
 <body>
 <header th:replace="~{fragments/navigation}"></header>
+
+<th:block th:text="${currentUser.fullName}"></th:block>
+<th:block th:text="${currentUser.username}"></th:block>
+<th:block th:text="${currentUser.email}"></th:block>
+<img class="img-size" th:src="${currentUser.profilePicture}" alt="">
+<a th:href="@{/user/edit}">Edit Profile</a>
+
+<h2>Currently Reading</h2>
+
+<div th:each="book:${currentlyReading}"
+     th:object="${book}"
+>
+
+    <a th:href="@{/book/{bookId} (bookId=*{id})}">
+        <th:block th:text="*{title}"></th:block>
+        <img class="img-size" th:src="*{imageUrl}" alt="Book cover"
+        >
+    </a>
+
+</div>
+
+<h2>Want to Read</h2>
+
+<div th:each="book:${wantToRead}"
+     th:object="${book}"
+>
+
+    <a th:href="@{/book/{bookId} (bookId=*{id})}">
+        <th:block th:text="*{title}"></th:block>
+        <img class="img-size" th:src="*{imageUrl}" alt="Book cover"
+        >
+    </a>
+
+</div>
+
+<h2>Read Books</h2>
+<div th:each="book:${read}"
+     th:object="${book}"
+>
+
+    <a th:href="@{/book/{bookId} (bookId=*{id})}">
+        <th:block th:text="*{title}"></th:block>
+        <img class="img-size" th:src="*{imageUrl}" alt="Book cover"
+        >
+    </a>
+
+</div>
+
+<h2>All Books</h2>
+
+<div th:each="book:${allUserBooks}"
+     th:object="${book}"
+>
+
+    <a th:href="@{/book/{bookId} (bookId=*{id})}">
+        <th:block th:text="*{title}"></th:block>
+        <img class="img-size" th:src="*{imageUrl}" alt="Book cover"
+        >
+    </a>
+
+</div>
+
+
 </body>
 </html>

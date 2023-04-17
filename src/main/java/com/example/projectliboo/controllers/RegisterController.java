@@ -33,10 +33,6 @@ public class RegisterController {
     }
 
 
-    @GetMapping("/profile")
-    private String profile() {
-        return "profile";
-    }
 
     @PostMapping("/register")
     private String registerUser(@Valid UserRegisterDto userRegisterDto, BindingResult bindingResult,
