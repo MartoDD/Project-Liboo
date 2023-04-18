@@ -127,7 +127,10 @@ public class BookServiceImpl implements BookService {
     public void editBook(Long id, BookEditDto bookEditDto) {
 
         Book book = bookRepository.findById(id).orElse(null);
-        book.setTitle(bookEditDto.getTitle());
+        if (!book.getTitle().equals(bookEditDto.getTitle())){
+
+            book.setTitle(bookEditDto.getTitle());
+        }
         book.setImageUrl(bookEditDto.getBookCover());
         book.setPages(bookEditDto.getBookPages());
         bookRepository.save(book);

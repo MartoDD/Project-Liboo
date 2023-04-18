@@ -11,10 +11,12 @@ spring:
     hiddenmethod:
       filter:
         enabled: 'true'
+    throw-exception-if-no-handler-found: true
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
     password: krastavici
     username: root
     url: jdbc:mysql://localhost:3306/liboo?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC
+
 server:
   port: 8080
