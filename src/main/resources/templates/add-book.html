@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head}">
+
+    <title>Add Book</title>
+</head>
+<body>
+
+<header th:replace="~{fragments/navigation}"></header>
+<ul th:replace="~{fragments/librarian-navigation}" ></ul>
+
+<form class="login-form"
+      th:method="POST"
+      th:action="@{/librarian/add-book}"
+      th:object="${bookCreateDto}"
+>
+
+    <label class="login-label">Book Title</label>
+
+    <input class="login-input"
+           th:field="*{title}"
+           name="title">
+
+    <small th:if="${#fields.hasErrors('title')}" th:errors="*{title}"  class="small-login" > </small>
+
+    <label class="login-label">Description</label>
+
+    <input class="login-input"
+           th:field="*{description}"
+           name="description"
+           type="text">
+
+    <small th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="small-login" > </small>
+
+    <label class="login-label">Pages</label>
+
+    <input class="login-input"
+           th:field="*{numberOfPages}"
+           name="numberOfPages"
+           type="number">
+
+    <small th:if="${#fields.hasErrors('numberOfPages')}" th:errors="*{description}" class="small-login" > </small>
+
+    <label class="login-label">Author</label>
+
+    <select class="login-input" th:field="*{authorName}"  >
+
+        <option th:each="author: ${authorListView.getAllAuthors()}"
+                th:value="${author.getName()}"
+                th:text="${author.getName()}" ></option>
+
+    </select>
+
+    <small th:if="${#fields.hasErrors('authorName')}" th:errors="*{authorName}" class="small-login" > </small>
+
+    <label class="login-label">Book Cover URL</label>
+
+    <input class="login-input"
+           th:field="*{imageUrl}"
+           name="imageUrl"
+           type="text">
+
+    <small th:if="${#fields.hasErrors('imageUrl')}" th:errors="*{imageUrl}" class="small-login" > </small>
+
+    <label class="login-label" > Select Genre </label>
+
+    <select class="login-input" th:field="*{genre}"  >
+
+        <option th:each="genre:${genreListView.getGenres()}"
+                th:value="${genre.getGenreName()}"
+        th:text="${genre.getGenreName()}" ></option>
+
+    </select>
+
+    <small th:if="${#fields.hasErrors('genre')}" th:errors="*{genre}" class="small-login" > </small>
+<div class="text-center" >
+    <button class="liboo-submit">Add</button>
+</div>
+</form>
+
+</body>
+</html>

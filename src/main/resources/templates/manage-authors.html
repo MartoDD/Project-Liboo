@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head}">
+
+    <title>Librarian</title>
+</head>
+<body>
+
+<header th:replace="~{fragments/navigation}"></header>
+
+<ul th:replace="~{fragments/librarian-navigation}"></ul>
+
+<form class="login-form" th:action="@{/librarian/manage-authors}">
+    <h5>Please type the author name</h5>
+    <input class="login-input" type="text"  th:name="keyword">
+    <div class="text-center" >
+    <button class="liboo-submit">Search</button>
+    </div>
+</form>
+
+<div class="d-flex justify-content-center" >
+    <div class="float-left" th:each="auth:${authors}" th:object="${auth}">
+        <a th:href="@{/book/author/{authorId} (authorId=*{id})}" style="display:flex; flex-direction:column;">
+            <p class="text-center book-font" th:text="*{name}" ></p>
+            <img class="img-size" th:src="*{profilePicture}" alt="Book cover" />
+        </a>
+        <div class="text-center" >
+        <a th:href="@{/librarian/edit-author/{authorId} (authorId=*{id})}">Edit Author</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

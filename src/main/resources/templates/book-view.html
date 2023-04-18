@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head}">
+    <meta charset="UTF-8">
+    <title>Book View</title>
+</head>
+<body>
+
+<header th:replace="~{fragments/navigation}"></header>
+
+<div class="row align-items-center" th:object="${book}">
+    <div class="col-md-2">
+        <img class="img-fluid" th:src="*{imageUrl}" alt="Book cover">
+    </div>
+    <div class="col-md-8">
+        <div class="text-white d-inline-flex display-4">
+            Title -
+            <p th:text="*{title}"></p>
+        </div>
+        <div class="text-white">
+            Description -
+            <p th:text="*{description}"></p>
+        </div>
+        <div class="text-white display-4">
+            Pages -
+            <p th:text="*{pages}" class="d-inline-flex"></p>
+        </div>
+        <div class="text-white display-4">
+            Author name -
+            <a th:href="@{/book/author/{authorId} (authorId=*{author.id})}">
+                <p th:text="*{author.name}" class="d-inline-flex"></p>
+            </a>
+        </div>
+        <div th:object="${genre}" class="text-white display-4">
+            Genre -
+            <a th:href="@{/book/genre/{genreId} (genreId=${genre.id})}">
+                <th:block th:text="${genre.genreName}" class="d-inline-flex" ></th:block>
+            </a>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="dropdown w-75">
+            <button class="dropbtn">Books</button>
+            <div class="dropdown-content">
+                <a th:href="@{/user/want-to-read/{id} (id=${book.id})}">Want to read</a>
+                <a th:href="@{/user/currently-reading/{id} (id=${book.id})}">Currently Reading</a>
+                <a th:href="@{/user/read/{id} (id=${book.id})}">Read</a>
+                <a th:href="@{/user/remove/{id} (id=${book.id})}">Remove</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

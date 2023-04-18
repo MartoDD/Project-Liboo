@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head}">
+
+    <title>Edit Author</title>
+</head>
+<body>
+
+<header th:replace="~{fragments/navigation}"></header>
+<ul th:replace="~{fragments/librarian-navigation}"></ul>
+
+<form class="login-form"
+      th:method="POST"
+      th:action="@{/librarian/edit-author/{id} (id=${authory.id})}"
+      th:object="${authorEditDto}"
+>
+
+    <label class="login-label">Author Name</label>
+
+    <input class="login-input"
+           th:field="*{name}"
+           name="name"
+           th:value="${authory.name}"
+    >
+
+    <small th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="small-login"> </small>
+
+    <label class="login-label">Information</label>
+
+    <input class="login-input"
+           th:field="*{information}"
+           name="information"
+           type="text"
+           th:value="${authory.information}"
+    >
+
+    <small th:if="${#fields.hasErrors('information')}" th:errors="*{information}" class="small-login"> </small>
+
+
+    <label class="login-label">Author Photo</label>
+
+    <input class="login-input"
+           th:field="*{profilePicture}"
+           name="profilePicture"
+           type="text"
+           th:value="${authory.profilePicture}"
+    >
+
+    <small th:if="${#fields.hasErrors('profilePicture')}" th:errors="*{profilePicture}" class="small-login"> </small>
+
+    <div class="text-center">
+        <button class="liboo-submit">Edit</button>
+    </div>
+</form>
+
+</body>
+</html>

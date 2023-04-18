@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head th:replace="~{fragments/head}">
+    <meta charset="UTF-8">
+    <title>Genre View</title>
+</head>
+<body>
+
+<header th:replace="~{fragments/navigation}"></header>
+
+<h2 th:text="${genre.genreName} + ' Books'" ></h2>
+
+<div class="d-flex justify-content-center" >
+    <div class="float-left" th:each="book:${books}" th:object="${book}">
+        <a th:href="@{/book/{bookId} (bookId=*{id})}" style="display:flex; flex-direction:column;">
+            <p class="text-center book-font" th:text="*{title}" ></p>
+            <img class="img-size" th:src="*{imageUrl}" alt="Book cover" />
+        </a>
+    </div>
+</div>
+
+</body>
+</html>

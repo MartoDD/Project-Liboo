@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/head}"></head>
+
+
+<body>
+
+<header th:replace="~{fragments/navigation}"></header>
+
+<form class="login-form"
+      th:method="POST"
+      th:action="@{/user/edit}"
+      th:object="${userEditDto}"
+>
+
+
+
+    <label class="login-label" > Profile Picture </label>
+
+    <input
+            th:field="*{profilePicture}"
+            type="text"
+            class="login-input"
+            id="username"
+            name="profilePicture"
+            th:value="${user.profilePicture}"/>
+
+    <label class="login-label" > Full Name</label>
+
+    <input class="login-input"
+           th:field="*{fullName}"
+           id="fullName"
+           name="fullName"
+           th:value="${user.fullName}"/>
+
+    <small class="small-login" th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}" ></small>
+
+
+    <label class="login-label" > Email
+    </label>
+
+    <input class="login-input"
+           th:field="*{email}"
+           name="email"
+           th:value="${user.email}"
+    >
+
+    <small th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="small-login"></small>
+
+
+    <div class="text-center" >
+        <button class="liboo-submit" >Update</button>
+    </div>
+</form>
+
+</body>
+</html>

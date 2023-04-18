@@ -1,0 +1,31 @@
+<ul th:fragment="librarian-navigation" class="text-center top-margin d-flex justify-content-center mx-auto">
+
+    <li class="dropbtn d-inline-block btn">
+        <a th:href="@{/librarian/home}">Home</a>
+    </li>
+
+    <div class="dropdown">
+        <button class="dropbtn btn">Books</button>
+        <div class="dropdown-content">
+            <a th:href="@{/librarian/add-book}" class="btn">Add Book</a>
+            <a th:href="@{/librarian/manage-books}" class="btn">Manage Books</a>
+        </div>
+    </div>
+
+    <div class="dropdown">
+        <button class="dropbtn btn">Authors</button>
+        <div class="dropdown-content">
+            <a th:href="@{/librarian/add-author}" class="btn">Add Author</a>
+            <a th:href="@{/librarian/manage-authors}" class="btn">Manage Authors</a>
+        </div>
+    </div>
+
+    <div class="dropdown">
+        <button class="dropbtn btn">Genres</button>
+        <div class="dropdown-content">
+            <a th:href="@{/librarian/add-genre}" class="btn">Add Genre</a>
+            <a th:href="@{/librarian/manage-genres}" class="btn">Manage Genres</a>
+        </div>
+    </div>
+
+</ul>

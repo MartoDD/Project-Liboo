@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head}">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<header th:replace="~{fragments/navigation}"></header>
+
+<form class="login-form" th:action="@{/admin/home}">
+    <label class="login-label">Type User Name</label>
+    <input class="login-input" type="text" th:name="keyword">
+    <div class="text-center">
+        <button class="liboo-submit">Search</button>
+    </div>
+</form>
+
+<div class="user-block"
+     th:each="user:${users}"
+     th:object="${user}"
+>
+    <img class="img-size" th:src="*{profilePicture}">
+    <ul class="admin-list">
+        <li> Full Name -
+            <p th:text="*{fullName}"></p>
+        </li>
+
+        <li> Username -
+            <p th:text="*{username}"></p>
+        </li>
+
+        <li> Email -
+            <p th:text="*{email}"></p>
+        </li>
+        <li> Role -
+            <p th:text="*{role}"></p>
+        </li>
+
+    </ul>
+
+    <a class="d-inline-block" th:href="@{/admin/delete/{userId} (userId=*{id})}">Remove User</a>
+
+    <div class="form-container">
+        <form
+                th:method="POST"
+                th:action="@{/admin/edit/{userId} (userId=*{id})}">
+            <div class="form-row">
+                <select th:field="${userRoleChangeDto.role}">
+                    <option value="ADMIN">Admin</option>
+                    <option value="LIBRARIAN">Librarian</option>
+                    <option value="USER">User</option>
+                </select>
+                <div class="text-center">
+                    <button>Change Role</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+
+</body>
+</html>

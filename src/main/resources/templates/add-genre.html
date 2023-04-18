@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head}">
+    <meta charset="UTF-8">
+    <title>Add genre</title>
+</head>
+<body>
+
+<header th:replace="~{fragments/navigation}"></header>
+<ul th:replace="~{fragments/librarian-navigation}" ></ul>
+<form class="login-form"
+      th:method="POST"
+      th:action="@{/librarian/add-genre}"
+      th:object="${genreCreateDto}">
+
+    <label class="login-label">Add Genre Name</label>
+
+    <input
+            th:field="*{genreName}"
+            type="text"
+            class="login-input"
+    >
+
+    <small th:if="${#fields.hasErrors('genreName')}" th:errors="*{genreName}" class="small-login" > </small>
+<div class="text-center" >
+    <button class="liboo-submit" >Submit</button>
+</div>
+</form>
+
+</body>
+</html>

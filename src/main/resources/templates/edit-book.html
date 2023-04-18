@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head}">
+
+    <title>Add Book</title>
+</head>
+<body>
+
+<header th:replace="~{fragments/navigation}"></header>
+<ul th:replace="~{fragments/librarian-navigation}"></ul>
+
+<form class="login-form"
+      th:method="POST"
+      th:action="@{/librarian/edit-book/{id} (id=${booksy.id})}"
+      th:object="${bookEditDto}"
+>
+
+    <label class="login-label">Book Title</label>
+
+    <input class="login-input"
+           th:field="*{title}"
+           name="title"
+           th:value="${booksy.title}"
+    >
+
+    <small th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="small-login"> </small>
+
+    <label class="login-label">Description</label>
+
+    <input class="login-input"
+           th:field="*{bookDescription}"
+           name="bookDescription"
+           type="text"
+           th:value="${booksy.bookDescription}"
+           style="height: 100px;width: 100%; max-width: 300px"
+    >
+
+    <small th:if="${#fields.hasErrors('bookDescription')}" th:errors="*{bookDescription}" class="small-login"> </small>
+
+    <label class="login-label">Pages</label>
+
+    <input class="login-input"
+           th:field="*{bookPages}"
+           name="bookPages"
+           type="number"
+           th:value="${booksy.bookPages}">
+
+    <small th:if="${#fields.hasErrors('bookPages')}" th:errors="*{bookPages}" class="small-login"> </small>
+
+
+    <label class="login-label">Book Cover URL</label>
+
+    <input class="login-input"
+           th:field="*{bookCover}"
+           name="bookCover"
+           type="text"
+           th:value="${booksy.bookCover}"
+    >
+
+    <small th:if="${#fields.hasErrors('bookCover')}" th:errors="*{bookCover}" class="small-login"> </small>
+
+    <div class="text-center">
+        <button class="liboo-submit">Update</button>
+    </div>
+</form>
+
+</body>
+</html>

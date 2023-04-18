@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head}">
+
+    <title>Librarian</title>
+</head>
+<body>
+
+<header th:replace="~{fragments/navigation}"></header>
+
+<ul th:replace="~{fragments/librarian-navigation}"></ul>
+
+<div>
+    <div class="float-left" th:each="book:${books}"
+         th:object="${book}">
+
+        <a th:href="@{/book/{bookId} (bookId=*{id})}">
+            <th:block th:text="*{title}"></th:block>
+            <img class="img-size" th:src="*{imageUrl}" alt="Book cover"
+            >
+        </a>
+        <a th:href="@{/librarian/delete/{bookId} (bookId=*{id})}">Remove Book</a>
+    </div>
+</div>
+</body>
+</html>
