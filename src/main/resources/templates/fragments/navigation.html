@@ -19,7 +19,7 @@
                 <th:block sec:authorize="hasRole('ROLE_LIBRARIAN')">
                     <li class="nav-item">
 
-                        <a class="nav-link" th:href="@{/librarian/home}">Librarian Page </a>
+                        <a class="nav-link " th:href="@{/librarian/home}">Librarian Page </a>
 
                     </li>
 
@@ -29,7 +29,7 @@
                 <th:block sec:authorize="hasRole('ROLE_ADMIN')">
                     <li class="nav-item">
 
-                        <a class="nav-link" th:href="@{/admin/home}">Admin Page </a>
+                        <a class="nav-link " th:href="@{/admin/home}">Admin Page </a>
 
                     </li>
 
@@ -38,11 +38,14 @@
 
                 <th:block sec:authorize="!isAuthenticated()">
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/user/register}">Register </a>
+
+
+                        <a class="nav-link " th:href="@{/user/register}">Register </a>
+
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/user/login}">Login </a>
+                        <a class="nav-link " th:href="@{/user/login}">Login </a>
                     </li>
 
 
@@ -53,26 +56,26 @@
 
                     <li class="nav-item">
 
-                        <a class="nav-link" th:href="@{/user/books}">Books</a>
+                        <a class="nav-link " th:href="@{/user/books}">Books</a>
 
                     </li>
 
                     <li class="nav-item">
 
-                        <a class="nav-link" th:href="@{/user/profile}">Profile </a>
+                        <a class="nav-link " th:href="@{/user/profile}">Profile </a>
 
                     </li>
 
                     <li class="nav-item">
 
-                        <a class="nav-link" th:href="@{/stats}">Stats </a>
+                        <a class="nav-link " th:href="@{/stats}">Stats </a>
 
                     </li>
 
                     <li class="nav-item">
                         <form th:action="@{/user/logout}"
                               th:method="POST">
-                            <button type="submit">
+                            <button type="submit" class="nav-link btn ">
                                 Logout
                             </button>
                         </form>

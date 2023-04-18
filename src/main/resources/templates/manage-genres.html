@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head}">
+
+  <title>Librarian</title>
+</head>
+<body>
+
+<header th:replace="~{fragments/navigation}"></header>
+
+<ul th:replace="~{fragments/librarian-navigation}"></ul>
+
+<form class="login-form" th:action="@{/librarian/manage-genres}">
+  <h5>Please type the genre name</h5>
+  <input class="login-input" type="text"  th:name="keyword">
+  <div class="text-center" >
+    <button class="liboo-submit">Search</button>
+  </div>
+</form>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="d-flex flex-column">
+        <div th:each="genre:${genres}" th:object="${genre}">
+          <a th:href="@{/genre/{genreId} (genreId=*{id})}" style="display:flex; flex-direction:column;">
+            <div>
+              <p class="text-center book-font" th:text="*{genreName}" ></p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

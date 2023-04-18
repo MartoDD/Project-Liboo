@@ -21,29 +21,33 @@
      th:each="user:${users}"
      th:object="${user}"
 >
-    <img class="img-size" th:src="*{profilePicture}">
-    <ul class="admin-list">
-        <li> Full Name -
-            <p th:text="*{fullName}"></p>
-        </li>
+    <div class="text-center">
+        <img class="img-size" th:src="*{profilePicture}">
+    </div>
+    <div class="text-center">
+        <ul class="admin-list">
+            <li> Full Name -
+                <p th:text="*{fullName}"></p>
+            </li>
 
-        <li> Username -
-            <p th:text="*{username}"></p>
-        </li>
+            <li> Username -
+                <p th:text="*{username}"></p>
+            </li>
 
-        <li> Email -
-            <p th:text="*{email}"></p>
-        </li>
-        <li> Role -
-            <p th:text="*{role}"></p>
-        </li>
+            <li> Email -
+                <p th:text="*{email}"></p>
+            </li>
+            <li> Role -
+                <p th:text="*{role}"></p>
+            </li>
 
-    </ul>
-
+        </ul>
+    </div>
+    <div class="text-center" >
     <a class="d-inline-block" th:href="@{/admin/delete/{userId} (userId=*{id})}">Remove User</a>
-
+    </div>
     <div class="form-container">
-        <form
+        <form class="bg-transparent"
                 th:method="POST"
                 th:action="@{/admin/edit/{userId} (userId=*{id})}">
             <div class="form-row">

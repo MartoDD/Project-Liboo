@@ -13,6 +13,7 @@ public interface GenreService {
     void addGenre(GenreCreateDto genreCreateDto);
 
     List<Genre> getAllGenres();
+    List<Genre>getAllGenresByKeyword(String keyword);
 
     Optional<Genre> findGenreByName(String name);
     Genre findGenreById(Long id);

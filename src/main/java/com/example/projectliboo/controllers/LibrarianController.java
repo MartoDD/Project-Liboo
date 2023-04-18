@@ -1,6 +1,7 @@
 package com.example.projectliboo.controllers;
 
 import com.example.projectliboo.model.dtos.*;
+import com.example.projectliboo.model.entity.Genre;
 import com.example.projectliboo.model.view.AuthorListView;
 import com.example.projectliboo.model.view.AuthorView;
 import com.example.projectliboo.model.view.BookView;
@@ -161,6 +162,15 @@ public class LibrarianController {
 
         return "manage-books";
 
+    }
+    @GetMapping("/manage-genres")
+    public String getAllGenres(Model model, @Param("keyword") String keyword){
+
+        List<Genre> genres=genreService.getAllGenresByKeyword(keyword);
+        model.addAttribute("genres", genres);
+        model.addAttribute("keyword", keyword);
+
+        return "manage-genres";
     }
 
     @GetMapping("/manage-authors")

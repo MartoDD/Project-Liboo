@@ -3,7 +3,7 @@
       xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{fragments/head}">
 
-  <title>Librarian</title>
+    <title>Librarian</title>
 </head>
 <body>
 
@@ -12,22 +12,24 @@
 <ul th:replace="~{fragments/librarian-navigation}"></ul>
 
 <form class="login-form" th:action="@{/librarian/manage-books}">
-  <h5>Please type the book name</h5>
-  <input class="login-input" type="text"  th:name="keyword">
-  <div class="text-center" >
-  <button class="liboo-submit">Search</button>
-  </div>
+    <h5>Please type the book name</h5>
+    <input class="login-input" type="text" th:name="keyword">
+    <div class="text-center">
+        <button class="liboo-submit">Search</button>
+    </div>
 </form>
 
-<div class="d-flex justify-content-center" >
-  <div class="float-left" th:each="book:${books}" th:object="${book}">
-    <a th:href="@{/book/{bookId} (bookId=*{id})}" style="display:flex; flex-direction:column;">
-      <p class="text-center book-font" th:text="*{title}" ></p>
-      <img class="img-size" th:src="*{imageUrl}" alt="Book cover" />
-    </a>
-    <a th:href="@{/librarian/edit-book/{bookId} (bookId=*{id})}">Edit Book</a>
-    <a th:href="@{/librarian/delete/{bookId} (bookId=*{id})}">Remove Book</a>
-  </div>
+<div class="row justify-content-center">
+    <div class="col-sm-6 col-md-4 col-lg-2" th:each="book:${books}" th:object="${book}">
+        <a th:href="@{/book/{bookId} (bookId=*{id})}" >
+            <p class="text-center book-font" th:text="*{title}" ></p>
+            <img class="img-size mx-auto d-block" th:src="*{imageUrl}" alt="Author profile picture" />
+        </a>
+        <div class="text-center" >
+            <a class="p-2" th:href="@{/librarian/edit-book/{bookId} (bookId=*{id})}">Edit Book</a>
+            <a th:href="@{/librarian/delete/{bookId} (bookId=*{id})}">Remove Book</a>
+        </div>
+    </div>
 </div>
 </body>
 </html>

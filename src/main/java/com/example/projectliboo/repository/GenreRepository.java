@@ -12,5 +12,6 @@ public interface GenreRepository extends JpaRepository<Genre, Long> {
 
     List<Genre>findAllByIdTrue();
     Optional<Genre>findGenreByGenreName(String name);
+    List<Genre>findAllByGenreNameContaining(String keyword);
 
 }

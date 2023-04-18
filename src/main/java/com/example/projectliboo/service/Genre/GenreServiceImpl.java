@@ -6,8 +6,10 @@ import com.example.projectliboo.model.enums.GenreEnum;
 import com.example.projectliboo.repository.GenreRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class GenreServiceImpl implements GenreService {
@@ -32,6 +34,16 @@ public class GenreServiceImpl implements GenreService {
     @Override
     public List<Genre> getAllGenres() {
         return genreRepository.findAllByIdTrue();
+    }
+
+    @Override
+    public List<Genre> getAllGenresByKeyword(String keyword) {
+        if (keyword == null) {
+
+            return new ArrayList<>(genreRepository.findAll());
+        }
+
+        return new ArrayList<>(genreRepository.findAllByGenreNameContaining(keyword));
     }
 
     @Override

@@ -29,7 +29,7 @@ public class BeanConfiguration {
 
         httpSecurity.authorizeHttpRequests()
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                .requestMatchers("/", "/user/login", "/user/register", "/user/login-error","/css/**","/img/**","/resources/**","/static/**","/templates/**").permitAll()
+                .requestMatchers("/", "/user/login", "/user/register", "/user/login-error", "/css/**", "/img/**", "/resources/**", "/static/**", "/templates/**").permitAll()
                 .requestMatchers("/librarian/*").hasRole(RoleEnum.LIBRARIAN.name())
                 .requestMatchers("/admin/*").hasRole(RoleEnum.ADMIN.name())
                 .anyRequest().authenticated()
@@ -46,6 +46,9 @@ public class BeanConfiguration {
                 .deleteCookies("JSESSIONID")
                 .clearAuthentication(true)
                 .configure(httpSecurity.requestCache().disable());
+
+        httpSecurity.exceptionHandling().accessDeniedPage("/403.html");
+
 
         return httpSecurity.build();
     }
@@ -66,7 +69,7 @@ public class BeanConfiguration {
     }
 
     @Bean
-    public UserView userView(){
+    public UserView userView() {
         return new UserView();
     }
 }
