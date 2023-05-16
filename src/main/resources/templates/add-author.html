@@ -8,42 +8,39 @@
 <body>
 
 <header th:replace="~{fragments/navigation}"></header>
-<ul th:replace="~{fragments/librarian-navigation}" ></ul>
+<ul th:replace="~{fragments/librarian-navigation}"></ul>
 <form class="login-form"
-        th:action="@{/librarian/add-author}"
-        th:method="POST"
-        th:object="${authorCreateDto}"
+      th:action="@{/librarian/add-author}"
+      th:method="POST"
+      th:object="${authorCreateDto}"
 >
 
-    <label class="login-label" >Author Name</label>
+    <label class="login-label">Author Name</label>
 
     <input class="login-input" th:field="*{name}"
            name="name"
            type="text">
 
-    <small th:if="${#fields.hasErrors('name')}" th:errors="*{name}"  class="small-login" ></small>
+    <small th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="small-login"></small>
 
-    <label class="login-label" > Information</label>
+    <label class="login-label"> Information
 
-    <input
-            class="login-input"
-            th:field="*{information}"
-            name="information"
-            type="text">
+        <textarea class="login-input" th:field="*{information}" name="information"></textarea>
+        
+    </label>
+    <small th:if="${#fields.hasErrors('information')}" th:errors="*{information}" class="small-login"> </small>
 
-    <small th:if="${#fields.hasErrors('information')}" th:errors="*{information}" class="small-login" > </small>
-
-    <label class="login-label" > Author Picture URL</label>
+    <label class="login-label"> Author Picture URL</label>
 
     <input class="login-input"
-            th:field="*{profilePicture}"
-            name="profilePicture"
-            type="text"
+           th:field="*{profilePicture}"
+           name="profilePicture"
+           type="text"
     >
-    <small th:if="${#fields.hasErrors('profilePicture')}" th:errors="*{profilePicture}" class="small-login" > </small>
-<div class="text-center" >
-    <button class="liboo-submit" >Submit</button>
-</div>
+    <small th:if="${#fields.hasErrors('profilePicture')}" th:errors="*{profilePicture}" class="small-login"> </small>
+    <div class="text-center">
+        <button class="liboo-submit">Submit</button>
+    </div>
 </form>
 
 </body>
